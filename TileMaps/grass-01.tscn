@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://bri5hwgk35qtq"]
 
 [ext_resource type="Texture2D" uid="uid://ctgy1ie1ucvdn" path="res://TileMaps/Sprites/Grass-01.png" id="1_qpdxt"]
+[ext_resource type="Script" uid="uid://b4dhnljoc1tt" path="res://TileMaps/LevelTileMap.gd" id="2_c54uy"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_c54uy"]
 texture = ExtResource("1_qpdxt")
@@ -474,4 +475,6 @@ sources/0 = SubResource("TileSetAtlasSource_c54uy")
 [node name="Grass-01" type="TileMap" unique_id=996853364]
 z_index = -1
 tile_set = SubResource("TileSet_d5s4j")
+rendering_quadrant_size = 32
 format = 2
+script = ExtResource("2_c54uy")
