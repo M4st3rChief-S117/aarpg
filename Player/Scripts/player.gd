@@ -3,6 +3,7 @@ class_name Player extends CharacterBody2D
 
 	# Vector2 is a variable that contains 2 values, x, y
 var cardinal_direction : Vector2 = Vector2.DOWN
+const DIR_4 = [ Vector2.RIGHT, Vector2.DOWN, Vector2.LEFT, Vector2.UP ]
 var direction : Vector2 = Vector2.ZERO
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
@@ -35,17 +36,15 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 func SetDirection() -> bool:
-	var new_dir : Vector2 = cardinal_direction
-	
 	# If the player is idle he's gonna stay the direction he was facing before
 	if direction == Vector2.ZERO:
 		return false
 	
-	if direction.y == 0:
-		new_dir = Vector2.LEFT if direction.x < 0 else Vector2.RIGHT
-	elif direction.x == 0:
-		new_dir = Vector2.UP if direction.y < 0 else Vector2.DOWN
-		
+	# angle / TAU = number from 0 to 1, getting an angle and make sure that it only relates to one of the directions
+	# (direction +sss cardinal_direction * 0.1) Gives a directon, but it skews it a bit over the cardinal direction, it favors the direction already facing when pressing multiple keys
+	var direction_id : int = int ( round( ( direction + cardinal_direction * 0.1 ).angle() / TAU * DIR_4.size() ) )
+	var new_dir = DIR_4[ direction_id ]
+	
 	if new_dir == cardinal_direction:
 		return false
 	
